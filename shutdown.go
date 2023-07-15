@@ -5,15 +5,17 @@ import (
 )
 
 type GracefulShutter struct {
-	opsCount           *int64
-	stoppedRegistering bool
-	mu                 *sync.RWMutex
+	opsCount            *int64
+	stoppedRegistering  bool
+	mu                  *sync.RWMutex
+	finishedWorkingChan chan struct{}
 }
 
 func NewConcurrentOpsRegister() *GracefulShutter {
 	return &GracefulShutter{
-		opsCount:           new(int64),
-		stoppedRegistering: false,
-		mu:                 &sync.RWMutex{},
+		opsCount:            new(int64),
+		stoppedRegistering:  false,
+		mu:                  &sync.RWMutex{},
+		finishedWorkingChan: make(chan struct{}),
 	}
 }
