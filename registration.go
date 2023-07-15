@@ -24,10 +24,10 @@ func (s *GracefulShutter) UnregisterOp() error {
 	atomic.AddInt64(s.opsCount, -1)
 
 	s.mu.RLock()
-	defer s.mu.RUnlock()
 	if s.stoppedRegistering && atomic.LoadInt64(s.opsCount) == 0 {
 		s.finishedWorkingChan <- struct{}{}
 	}
+	s.mu.RUnlock()
 
 	return nil
 }
