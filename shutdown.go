@@ -38,6 +38,13 @@ func (s *GracefulShutter) UnregOp() error {
 	return nil
 }
 
-func (s *GracefulShutter) StopRegistering() {
+func (s *GracefulShutter) StopRegistering() (err error) {
+	defer func() {
+		recover()
+		err = ErrRepetitiveStopping
+	}()
+
 	close(s.stopChan)
+
+	return err
 }
