@@ -38,7 +38,7 @@ func (s *GracefulShutter) UnregOp() error {
 	return nil
 }
 
-func (s *GracefulShutter) StopRegistering() (err error) {
+func (s *GracefulShutter) ShutdownGracefully() (err error) {
 	defer func() {
 		recover()
 		err = ErrRepetitiveStopping
