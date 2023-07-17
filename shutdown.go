@@ -9,7 +9,7 @@ type GracefulShutter struct {
 	stopChan chan struct{}
 }
 
-func NewConcurrentOpsRegister() *GracefulShutter {
+func NewGracefulShutter() *GracefulShutter {
 	return &GracefulShutter{
 		opsCount: new(int64),
 		stopChan: make(chan struct{}),
