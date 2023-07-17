@@ -40,8 +40,11 @@ func (s *GracefulShutter) UnregOp() error {
 
 func (s *GracefulShutter) ShutdownGracefully() (err error) {
 	defer func() {
-		recover()
-		err = ErrRepetitiveStopping
+		if recover() == nil {
+			err = nil
+		} else {
+			err = ErrRepetitiveStopping
+		}
 	}()
 
 	close(s.stopChan)
