@@ -14,11 +14,13 @@ func NewGracefulShutter() *GracefulShutter {
 	}
 }
 
-func (s *GracefulShutter) RegOp() {
+func (s *GracefulShutter) RegOp() error {
 	select {
 	case <-s.stopChan:
+		return ErrFinishedRegistration
 	default:
 		s.wg.Add(1)
+		return nil
 	}
 }
 
