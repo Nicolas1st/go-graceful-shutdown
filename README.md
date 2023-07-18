@@ -7,7 +7,8 @@ package main
 
 import (
 	"fmt"
-	shutdown "go-graceful-shutdown"
+
+	shutdown "github.com/Nicola1st/go-graceful-shutdown"
 )
 
 type Api struct {
