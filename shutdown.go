@@ -27,10 +27,12 @@ func (s *GracefulShutter) RegOp() error {
 }
 
 func (s *GracefulShutter) UnregOp() error {
+	// catch unintended lib use
 	if atomic.LoadInt64(s.opsCount) == 0 {
 		return ErrNothingToRegister
 	}
 
+	// catch unintended lib use
 	if newOpsCount := atomic.AddInt64(s.opsCount, -1); newOpsCount < 0 {
 		return ErrNegativeOpsCount
 	}
