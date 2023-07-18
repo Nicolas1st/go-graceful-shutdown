@@ -1,4 +1,4 @@
-# Minimalist Graceful Shutdown Implementation in Go
+# Minimalist Go Graceful Shutdown Implementation 
 
 [Example](examples/example.go)
 
